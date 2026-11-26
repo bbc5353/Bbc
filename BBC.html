@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BBC</title>
+<style>
+:root{--g:#4ade80;--tx:#f1f5ff;--mu:#9fb0d0;--ok:#4ade80;--no:#fb7185;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{min-height:100%;background:#0b1224}
+body{margin:0;min-height:100vh;color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:linear-gradient(160deg,#0b1224 0%,#142a5c 55%,#1f4fa8 100%);background-attachment:fixed}
+.w{max-width:520px;margin:0 auto;padding:18px 16px 32px}
+.logo{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.logo i{width:44px;height:44px;border-radius:12px;background:var(--g);color:#0b1224;font:700 24px system-ui;display:grid;place-items:center;font-style:normal}
+.logo b{font-size:20px;display:block}.logo span{font-size:12px;color:var(--mu)}
+.box{background:rgba(10,16,36,.55);border:1px solid rgba(140,170,255,.25);border-radius:22px;padding:20px 16px}
+.eyebrow{color:var(--g);font-size:12px;font-weight:700;letter-spacing:.14em;text-align:center}
+h1{font-size:30px;line-height:1.15;text-align:center;margin:10px 0 12px}
+.lead{color:var(--mu);text-align:center;font-size:14px;margin:0 0 18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.stats div{background:rgba(255,255,255,.06);border:1px solid rgba(140,170,255,.2);border-radius:12px;padding:10px 4px;text-align:center}
+.stats b{display:block;color:var(--g);font-size:20px}.stats small{font-size:12px;color:var(--mu)}
+h2{font-size:16px;margin:0 0 10px}
+button{font:inherit;color:inherit;cursor:pointer}
+.ders{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:rgba(40,70,140,.45);border:1px solid rgba(140,170,255,.3);border-radius:16px;padding:14px;margin-bottom:10px}
+.ders em{font-style:normal;font-size:24px;width:42px;height:42px;display:grid;place-items:center;background:rgba(255,255,255,.1);border-radius:10px}
+.ders span{flex:1}.ders b{display:block;font-size:15px}.ders small{color:var(--mu)}
+.note{text-align:center;color:var(--mu);font-size:12px;margin-top:14px}
+.top{display:flex;justify-content:space-between;font-size:13px;color:var(--mu);margin-bottom:8px}
+.bar{height:6px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--g);transition:width .3s}
+.q{font-size:18px;font-weight:600;margin-bottom:14px}
+.opt{display:block;width:100%;text-align:left;padding:13px;margin-bottom:8px;background:rgba(40,70,140,.45);border:1.5px solid rgba(140,170,255,.3);border-radius:12px;font-size:15px}
+.opt.ok{border-color:var(--ok);background:rgba(74,222,128,.2)}
+.opt.no{border-color:var(--no);background:rgba(251,113,133,.2)}
+.exp{margin-top:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.08);font-size:14px}
+.main{display:block;width:100%;padding:14px;margin-top:12px;border:0;border-radius:12px;background:var(--g);color:#0b1224;font-weight:700;font-size:16px}
+.ghost{background:transparent;color:var(--tx);border:1.5px solid rgba(140,170,255,.4)}
+.big{font-size:52px;font-weight:800;text-align:center;color:var(--g);margin:10px 0}
+.c{text-align:center}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="logo"><i>B</i><div><b>BBC</b><span>Soru çöz, pekiştir</span></div></div>
+<div class="box" id="app"></div>
+</div>
+<script>
+const D=[
+{ad:"İşlem Tablosu Programlama",ic:"📊",q:[
+["Excel'de formüller hangi karakterle başlar?",["=","#","@","$"],0,"Her formül = işaretiyle başlar."],
+["Bir aralıktaki sayıları toplayan fonksiyon hangisidir?",["TOPLA","EĞER","DÜŞEYARA","SAY"],0,"=TOPLA(A1:A5) aralıktaki değerleri toplar."],
+["Mutlak hücre başvurusunda hangi işaret kullanılır?",["$","%","&","#"],0,"$A$1 gibi yazılan başvuru, kopyalanınca değişmez."],
+["EĞER fonksiyonu ne işe yarar?",["Koşula göre farklı sonuç döndürür","Sayıları toplar","Tabloyu sıralar","Grafik çizer"],0,"EĞER, mantıksal koşul doğruysa bir, yanlışsa başka bir değer verir."],
+["DÜŞEYARA fonksiyonu ne yapar?",["Tablonun ilk sütununda arayıp aynı satırdan değer getirir","Hücreyi renklendirir","Sayfayı korur","Sütunu siler"],0,"DÜŞEYARA, dikey tabloda arama yapar."],
+["Bir aralığın aritmetik ortalamasını bulan fonksiyon hangisidir?",["ORTALAMA","MAK","MİN","BÜYÜK"],0,"=ORTALAMA(A1:A5) ortalamayı hesaplar."]]},
+{ad:"Kullanıcı Deneyimi Tasarımı",ic:"🎨",q:[
+["Kullanıcı deneyimi (UX) neyi ifade eder?",["Kullanıcının ürünle etkileşiminde yaşadığı bütüncül deneyimi","Sadece renk seçimini","Sadece yazılım kodunu","Sunucu performansını"],0,"UX, ürünü kullanırken yaşanan tüm deneyimdir."],
+["Hedef kullanıcıyı temsil eden kurgusal profile ne denir?",["Persona","Prototip","Wireframe","Algoritma"],0,"Persona, hedef kitleyi somutlaştıran kurgusal kullanıcıdır."],
+["Arayüzün düşük detaylı iskelet taslağına ne denir?",["Wireframe","Persona","Veritabanı","Derleyici"],0,"Wireframe, yerleşimi gösteren sade taslaktır."],
+["Kullanılabilirlik testinin amacı nedir?",["Ürünün gerçek kullanıcılarla kullanım kolaylığını ölçmek","Sunucuyu hızlandırmak","Kodu şifrelemek","Reklam vermek"],0,"Test, kullanıcıların ürünü ne kadar rahat kullandığını gösterir."],
+["Ürünün test edilebilir ön modeline ne denir?",["Prototip","Persona","Lisans","Protokol"],0,"Prototip, fikrin erken aşamada denenmesini sağlar."],
+["Renk, buton ve tipografi gibi görsel öğelerin tasarımı hangisidir?",["UI (Kullanıcı Arayüzü)","Veri tabanı","Ağ yönetimi","Donanım"],0,"UI, arayüzün görsel tasarımıdır."]]},
+{ad:"Web Tabanlı Kodlama",ic:"🌐",q:[
+["HTML'in açılımı nedir?",["HyperText Markup Language","High Text Machine Language","Home Tool Markup Level","Hyper Transfer Mode Language"],0,"HTML, web sayfalarının yapısını tanımlayan işaretleme dilidir."],
+["HTML'de en büyük başlık etiketi hangisidir?",["<h1>","<h6>","<head>","<title>"],0,"<h1> en büyük, <h6> en küçük başlıktır."],
+["Bağlantı (link) oluşturan etiket hangisidir?",["<a>","<img>","<p>","<ul>"],0,"<a href=...> bağlantı oluşturur."],
+["Sayfaya resim eklemek için hangi etiket kullanılır?",["<img>","<a>","<table>","<br>"],0,"<img src=...> resim ekler."],
+["CSS'in temel görevi nedir?",["Sayfanın görünümünü biçimlendirmek","Veritabanı yönetmek","Sunucu kurmak","Dosya sıkıştırmak"],0,"CSS renk, yerleşim ve yazı stillerini belirler."],
+["JavaScript web sayfasına ne katar?",["Etkileşim ve dinamik davranış","Sadece renk","Sadece resim","Sunucu donanımı"],0,"JavaScript, sayfaya etkileşim ve dinamik davranış kazandırır."]]},
+{ad:"Bilişim Teknolojileri",ic:"🖥️",q:[
+["Bilgisayarda komutları işleyen ana birim hangisidir?",["İşlemci (CPU)","RAM","Güç kaynağı","Klavye"],0,"CPU komutları çalıştırır."],
+["Hangisi bir giriş birimidir?",["Klavye","Yazıcı","Monitör","Hoparlör"],0,"Klavye veri girişi yapar."],
+["1 Byte kaç bittir?",["8","4","16","1024"],0,"1 Byte = 8 bit."],
+["RAM için hangisi doğrudur?",["Geçici (uçucu) bellektir","Kalıcı depolar","Sadece okunur","Ağ cihazıdır"],0,"Elektrik kesilince RAM içeriği silinir."],
+["Hangisi bir işletim sistemidir?",["Linux","Excel","Chrome","Word"],0,"Linux bir işletim sistemidir."],
+["Bulut bilişim nedir?",["Hizmet ve verilerin internet üzerinden uzak sunucularda sunulması","Sadece yerel disk kullanımı","Bir virüs türü","Bir yazıcı çeşidi"],0,"Bulut bilişimde kaynaklara internet üzerinden erişilir."]]},
+{ad:"Algoritmalar",ic:"🧠",q:[
+["Algoritma nedir?",["Problemi çözen sıralı adımlar bütünü","Bir donanım parçası","Bir işletim sistemi","Bir tarayıcı"],0,"Algoritma, problemin çözüm adımlarıdır."],
+["Akış diyagramında karar kutusu hangi şekildir?",["Eşkenar dörtgen","Dikdörtgen","Elips","Paralelkenar"],0,"Karar (koşul) kutusu eşkenar dörtgendir."],
+["17 % 5 işleminin sonucu kaçtır?",["2","3","3,4","12"],0,"% bölümden kalanı verir: 17 = 3·5 + 2."],
+["toplam=0; i=1'den 4'e kadar toplam=toplam+i. Sonuç kaçtır?",["10","6","4","24"],0,"1+2+3+4 = 10."],
+["Boolean veri tipi hangi değerleri alır?",["True / False","Sadece sayı","Sadece metin","Ondalık sayı"],0,"Boolean yalnızca doğru ya da yanlış tutar."],
+["Programdaki hataları bulup düzeltmeye ne denir?",["Hata ayıklama (debug)","Derleme","Yedekleme","Kodlama"],0,"Hata ayıklamaya debug denir."]]}
+];
+
+const X=[[
+["B$2 başvurusunda hangisi sabittir?",["2. satır","B sütunu","Her ikisi","Hiçbiri"],0,"$ işareti kendinden sonraki kısmı sabitler: satır 2 sabit."],
+["Bir aralıktaki en büyük değeri bulan fonksiyon hangisidir?",["MAK","MİN","TOPLA","SAY"],0,"=MAK(A1:A9) en büyük değeri verir."],
+["Bir aralıktaki en küçük değeri bulan fonksiyon hangisidir?",["MİN","MAK","EĞER","VE"],0,"=MİN(A1:A9) en küçük değeri verir."],
+["Aralıkta sayı içeren hücrelerin adedini veren fonksiyon hangisidir?",["SAY","TOPLA","ORTALAMA","DÜŞEYARA"],0,"SAY yalnızca sayı içeren hücreleri sayar."],
+["Koşula uyan hücreleri toplayan fonksiyon hangisidir?",["ETOPLA","TOPLA","MAK","SAY"],0,"ETOPLA (SUMIF) koşula uyanları toplar."],
+["Koşula uyan hücrelerin sayısını veren fonksiyon hangisidir?",["EĞERSAY","TOPLA","ORTALAMA","MİN"],0,"EĞERSAY koşula uyan hücreleri sayar."],
+["Verileri belli koşula göre görüntüleyip diğerlerini gizleyen özellik hangisidir?",["Filtre","Birleştir","Kenarlık","Yazdır"],0,"Filtre, koşula uymayan satırları geçici gizler."],
+["Tüm koşulların doğru olmasını isteyen mantıksal fonksiyon hangisidir?",["VE","YADA","DEĞİL","TOPLA"],0,"VE, bütün koşullar doğruysa DOĞRU döndürür."],
+["Koşullardan en az birinin doğru olmasını yeterli sayan fonksiyon hangisidir?",["YADA","VE","MAK","SAY"],0,"YADA, en az bir koşul doğruysa DOĞRU verir."],
+["#BÖL/0! hatası neden oluşur?",["Bir sayı sıfıra bölündüğünde","Hücre boş olduğunda","Sayfa korunduğunda","Dosya kaydedilmediğinde"],0,"Sıfıra bölme hata verir."],
+["Satır ve sütunun kesiştiği alana ne denir?",["Hücre","Sayfa","Grafik","Çalışma kitabı"],0,"Satır ile sütunun kesişimi hücredir."],
+["Sütun grafiği en çok ne için kullanılır?",["Değerleri karşılaştırmak","Metin yazmak","Formül silmek","Sayfa korumak"],0,"Sütun grafiği kategorileri karşılaştırır."],
+["Büyük veriyi özetleyip analiz etmeye yarayan araç hangisidir?",["Özet Tablo (Pivot)","Kenarlık","Yazı tipi","Sayfa düzeni"],0,"Özet Tablo veriyi gruplayıp özetler."],
+["Bir formülü yanındaki hücrelere hızlıca kopyalamak için hangisi kullanılır?",["Doldurma tutamacı","Yazım denetimi","Filtre","Kenarlık"],0,"Doldurma tutamacı formülü sürükleyerek çoğaltır."]
+],[
+["Nielsen'in kullanılabilirlik ilkeleri kaç tanedir?",["10","5","7","12"],0,"Nielsen'in 10 sezgisel kullanılabilirlik ilkesi vardır."],
+["Kullanıcının ürünle etkileşim adımlarını görselleştiren araç hangisidir?",["Kullanıcı yolculuğu haritası","Veritabanı şeması","Ağ diyagramı","Derleyici"],0,"Yolculuk haritası, kullanıcının adım adım deneyimini gösterir."],
+["İki tasarım varyantını kullanıcılarla karşılaştıran yönteme ne denir?",["A/B testi","Normalizasyon","Derleme","Önbellekleme"],0,"A/B testinde iki versiyonun performansı karşılaştırılır."],
+["Kullanıcının düşündüğü, hissettiği, söylediği ve yaptığı şeyleri özetleyen araç hangisidir?",["Empati haritası","Akış şeması","Sitemap","Prototip"],0,"Empati haritası kullanıcıyı anlamaya yarar."],
+["İçeriğin düzenlenmesi ve yapılandırılmasına ne denir?",["Bilgi mimarisi","Veri şifreleme","Ağ mimarisi","Derleme"],0,"Bilgi mimarisi, içeriğin bulunabilir olmasını sağlar."],
+["Erişilebilirlik neyi hedefler?",["Engelli bireyler dahil herkesin ürünü kullanabilmesini","Ürünü pahalılaştırmayı","Sadece hızı","Sadece görseli"],0,"Erişilebilirlik, herkes için kullanılabilirliktir."],
+["Tasarım odaklı düşünmenin ilk adımı genellikle nedir?",["Kullanıcıya empati kurmak","Kodlamak","Pazarlamak","Yedeklemek"],0,"Süreç kullanıcıyı anlamakla başlar."],
+["Kullanıcı görüşmeleri hangi tür araştırma yöntemidir?",["Niteliksel","Niceliksel","Donanımsal","Matematiksel"],0,"Görüşme, nedenleri anlamaya yarayan niteliksel yöntemdir."],
+["Gerçek ürüne yakın görünüm ve etkileşim sunan prototip hangisidir?",["Yüksek sadakatli prototip","Kâğıt taslak","Persona","Wireframe"],0,"Yüksek sadakatli prototip ürüne çok benzer."],
+["'Sistem durumunun görünürlüğü' ilkesi neyi ifade eder?",["Kullanıcıya yapılan işlem hakkında geri bildirim verilmesini","Renk sayısını","Dosya boyutunu","Sunucu adını"],0,"Sistem, kullanıcıya ne olduğunu bildirmelidir."],
+["Tutarlılık ilkesi neyi gerektirir?",["Benzer öğelerin benzer çalışmasını","Her sayfanın farklı olmasını","Sadece renkli olmayı","Az metni"],0,"Tutarlılık öğrenmeyi kolaylaştırır."],
+["Duyarlı (responsive) tasarım ne demektir?",["Farklı ekran boyutlarına uyum sağlaması","Sadece masaüstünde çalışması","Sadece mobilde çalışması","Animasyonsuz olması"],0,"Duyarlı tasarım ekrana göre kendini ayarlar."],
+["Hata önleme ilkesi ne söyler?",["Hatayı oluşmadan engelleyecek tasarım yapılmalıdır","Hata mesajı hiç verilmemelidir","Kullanıcı suçlanmalıdır","Hatalar gizlenmelidir"],0,"En iyi tasarım hatayı baştan önler."],
+["CTA (çağrı eylem) butonu ne işe yarar?",["Kullanıcıyı belirli bir eyleme yönlendirir","Sayfayı kapatır","Veriyi siler","Ağı yeniler"],0,"CTA örnek olarak 'Satın al' gibi eylem çağrısıdır."]
+],[
+["Paragraf oluşturan HTML etiketi hangisidir?",["<p>","<a>","<ul>","<br>"],0,"<p> bir paragraf tanımlar."],
+["Sırasız (madde işaretli) liste etiketi hangisidir?",["<ul>","<ol>","<li>","<table>"],0,"<ul> sırasız liste, <li> liste öğesidir."],
+["Sıralı (numaralı) liste etiketi hangisidir?",["<ol>","<ul>","<p>","<img>"],0,"<ol> numaralı liste oluşturur."],
+["Tablo oluşturmak için hangi etiket kullanılır?",["<table>","<tab>","<grid>","<list>"],0,"<table>, <tr> ve <td> ile tablo kurulur."],
+["Satır sonu (alt satıra geçme) etiketi hangisidir?",["<br>","<hr>","<p>","<em>"],0,"<br> satır sonu ekler."],
+["CSS'te yazı rengini belirleyen özellik hangisidir?",["color","font-size","margin","border"],0,"color özelliği yazı rengini ayarlar."],
+["CSS'te arka plan rengi için hangi özellik kullanılır?",["background-color","text-color","font-color","bg"],0,"background-color arka plan rengidir."],
+["CSS'te sınıf (class) seçici hangi işaretle başlar?",["Nokta (.)","Kare (#)","Dolar ($)","At (@)"],0,".menu şeklinde sınıf seçilir; # id içindir."],
+["CSS'te id seçici hangi işaretle başlar?",["# (kare)","Nokta (.)","Yıldız (*)","Yüzde (%)"],0,"#baslik şeklinde id seçilir."],
+["HTML yorum satırı nasıl yazılır?",["<!-- yorum -->","// yorum","# yorum","/* yorum */"],0,"HTML'de yorum <!-- --> ile yazılır."],
+["JavaScript'te değişken tanımlamak için hangisi kullanılır?",["let","dim","define","var()"],0,"let (ve const, var) değişken tanımlar."],
+["Tarayıcı sekmesinde görünen sayfa başlığını belirleyen etiket hangisidir?",["<title>","<h1>","<header>","<meta>"],0,"<title> sekme başlığını belirler."],
+["Kullanıcıdan veri almak için kullanılan form elemanı hangisidir?",["<input>","<img>","<br>","<hr>"],0,"<input> metin kutusu vb. alanlar oluşturur."],
+["<!DOCTYPE html> ifadesi ne bildirir?",["Belgenin HTML5 olduğunu","Sayfa rengini","Yazı tipini","Sunucu adresini"],0,"Tarayıcıya belge türünü bildirir."]
+],[
+["1 KB kaç Byte'tır?",["1024","1000","8","512"],0,"1 KB = 1024 Byte."],
+["Hangisi bir çıkış birimidir?",["Hoparlör","Fare","Klavye","Mikrofon"],0,"Hoparlör ses çıkışı sağlar."],
+["URL neyi ifade eder?",["Web adresini","Yazılım lisansını","Dosya boyutunu","İşlemci hızını"],0,"URL, kaynağın web adresidir."],
+["Hangisi bir web tarayıcısıdır?",["Chrome","Linux","Excel","Photoshop"],0,"Chrome bir web tarayıcısıdır."],
+["IP adresi nedir?",["Ağdaki cihazı tanımlayan adres","Bir virüs adı","Bir işlemci modeli","Bir dosya türü"],0,"IP adresi cihazı ağda tanımlar."],
+["Bilgisayarı zararlı yazılımlardan korumak için ne kullanılır?",["Antivirüs","Yazıcı","Hoparlör","Tarayıcı"],0,"Antivirüs zararlı yazılımları tespit eder."],
+["Oltalama (phishing) saldırısı nedir?",["Sahte site ya da mesajla bilgi çalmaya çalışmak","Donanım arızası","Dosya sıkıştırma","Ekran yenileme"],0,"Phishing kullanıcıyı kandırarak bilgi çalar."],
+["Güvenlik duvarı (firewall) ne yapar?",["Ağ trafiğini denetler ve filtreler","Dosya yazdırır","Ses kaydeder","Ekran parlaklığını ayarlar"],0,"Firewall izinsiz erişimi engellemeye yardımcı olur."],
+["Hangisi bir uygulama yazılımıdır?",["Word","Linux","BIOS","Sürücü"],0,"Word bir kelime işlemcidir; uygulama yazılımıdır."],
+["Dosya uzantısı .docx hangi programa aittir?",["Word","Excel","PowerPoint","Paint"],0,".docx Word belgesidir."],
+["Kullanıcı ile donanım arasında köprü kuran temel yazılım hangisidir?",["İşletim sistemi","Antivirüs","Tarayıcı","Oyun"],0,"İşletim sistemi donanımı yönetir."],
+["Hangisi güçlü bir parolanın özelliğidir?",["Büyük-küçük harf, rakam ve sembol içermesi","Doğum tarihi olması","123456 olması","Adın aynısı olması"],0,"Karma ve uzun parolalar daha güvenlidir."],
+["İnternet üzerinden e-posta göndermede kullanılan protokol hangisidir?",["SMTP","FTP","HTTP","DNS"],0,"SMTP e-posta gönderme protokolüdür."],
+["Verilerin yedeğini almak neden önemlidir?",["Veri kaybında geri dönmeyi sağlar","Bilgisayarı hızlandırır","İnterneti açar","Ekranı büyütür"],0,"Yedek, veri kaybına karşı korur."]
+],[
+["Akış diyagramında başlangıç/bitiş hangi şekille gösterilir?",["Elips (oval)","Dikdörtgen","Eşkenar dörtgen","Paralelkenar"],0,"Başla/Bitir elipsle gösterilir."],
+["Akış diyagramında giriş/çıkış işlemi hangi şekille gösterilir?",["Paralelkenar","Elips","Eşkenar dörtgen","Daire"],0,"Veri girişi/çıkışı paralelkenardır."],
+["Akış diyagramında işlem adımı hangi şekille gösterilir?",["Dikdörtgen","Elips","Eşkenar dörtgen","Paralelkenar"],0,"Hesaplama ve atama dikdörtgenle gösterilir."],
+["Sözde kod (pseudocode) nedir?",["Algoritmanın doğal dile yakın yazımı","Makine dili","Bir donanım","Bir tarayıcı"],0,"Sözde kod, algoritmayı kod gibi ama dilden bağımsız anlatır."],
+["Koşula göre farklı yol seçmeyi sağlayan yapı hangisidir?",["Karar (if) yapısı","Dizi","Sabit","Yorum"],0,"if, koşula göre dallanmayı sağlar."],
+["7 / 2 işleminin tam sayı bölmesi sonucu kaçtır?",["3","2","3,5","4"],0,"Tam sayı bölmesinde 7 / 2 = 3 (kalan 1)."],
+["Sonsuz döngü ne zaman oluşur?",["Döngü koşulu hiç yanlış olmadığında","Değişken tanımlandığında","Program bittiğinde","Yorum yazıldığında"],0,"Çıkış koşulu sağlanmazsa döngü bitmez."],
+["Bir algoritmanın temel özelliklerinden biri hangisidir?",["Sonlu olması","Sonsuz sürmesi","Belirsiz adımlar","Rastgele işlemesi"],0,"Algoritma belirli sayıda adımda sonlanmalıdır."],
+["Sabit (constant) nedir?",["Değeri program boyunca değişmeyen veri","Her adımda değişen veri","Bir döngü","Bir hata"],0,"Sabitin değeri değişmez."],
+["for i=1 to 5 döngüsü kaç kez çalışır?",["5","4","6","1"],0,"1,2,3,4,5 → 5 kez."],
+["Dizi (array) nedir?",["Aynı türde birçok veriyi tek adla tutan yapı","Tek bir sayı","Bir döngü","Bir yorum"],0,"Dizi, indeksle erişilen veri kümesidir."],
+["Eşitlik karşılaştırması genellikle hangi operatörle yapılır?",["==","=","=>","!"],0,"== eşit mi diye karşılaştırır, = atama yapar."],
+["Değişkene değer atamak için genellikle hangi operatör kullanılır?",["=","==","!=","<"],0,"= atama operatörüdür."],
+["Bir sayının çift olup olmadığı hangi işlemle anlaşılır?",["2'ye bölümünden kalana bakılarak","Karekökü alınarak","Toplanarak","Yazdırılarak"],0,"sayı % 2 == 0 ise çifttir."]
+]];
+X.forEach((e,i)=>D[i].q.push(...e));
+const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const A=document.getElementById('app');let S={};
+const sh=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+function home(){const t=D.reduce((s,d)=>s+d.q.length,0);
+let h=`<div class="eyebrow">VİZE HAZIRLIK UYGULAMASI</div><h1>Bilgini test et.<br>Vizeye hazır ol.</h1><p class="lead">Dersini seç, soruları çöz, doğru ve yanlışlarını gör. İstediğin zaman tekrar deneyebilirsin.</p><div class="stats"><div><b>${D.length}</b><small>Ders</small></div><div><b>${t}</b><small>Soru</small></div><div><b>Ücretsiz</b><small>Kullanım</small></div></div><h2>Dersini seç</h2>`;
+D.forEach((d,i)=>h+=`<button class="ders" onclick="start(${i})"><em>${d.ic}</em><span><b>${d.ad}</b><small>${d.q.length} soru</small></span>›</button>`);
+h+='<div class="note">Cevap verdikten sonra doğru yanıtı ve açıklamasını görebilirsin.</div>';A.innerHTML=h}
+function start(i){const q=sh(D[i].q).map(c=>{const o=c[1].map((t,k)=>[t,k===c[2]]);const m=sh(o);return[c[0],m.map(x=>x[0]),m.findIndex(x=>x[1]),c[3]]});S={i,q,n:0,p:0,a:false};show()}
+function show(){const{q,n}=S;if(n>=q.length)return end();const c=q[n];
+let h=`<div class="top"><span>${D[S.i].ad}</span><span>${n+1}/${q.length}</span></div><div class="bar"><i style="width:${n/q.length*100}%"></i></div><div class="q">${esc(c[0])}</div>`;
+c[1].forEach((o,k)=>h+=`<button class="opt" id="o${k}" onclick="pick(${k})">${'ABCD'[k]}) ${esc(o)}</button>`);
+h+='<div id="ex"></div><button class="main ghost" onclick="home()">Derslere dön</button>';A.innerHTML=h}
+function pick(k){if(S.a)return;S.a=true;const c=S.q[S.n];if(k===c[2])S.p++;
+document.getElementById('o'+c[2]).classList.add('ok');if(k!==c[2])document.getElementById('o'+k).classList.add('no');
+document.getElementById('ex').innerHTML=`<div class="exp">${k===c[2]?'✅ Doğru!':'❌ Yanlış.'} ${esc(c[3])}</div><button class="main" onclick="next()">${S.n+1>=S.q.length?'Sonucu gör':'Sonraki soru'}</button>`}
+function next(){S.n++;S.a=false;show()}
+function end(){const t=S.q.length;A.innerHTML=`<div class="c"><div>Sonuç</div><div class="big">${S.p}/${t}</div><div>${S.p===t?'Harika! 🎉':S.p>=t/2?'İyi gidiyorsun 👍':'Tekrar çözmeye devam 💪'}</div></div><button class="main" onclick="start(${S.i})">Tekrar çöz</button><button class="main ghost" onclick="home()">Derslere dön</button>`}
+home();
+</script>
+</body>
+</html>
