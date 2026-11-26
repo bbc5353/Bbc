@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Soru Bankası</title>
+<style>
+:root{--g:#4ade80;--tx:#f1f5ff;--mu:#9fb0d0;--ok:#4ade80;--no:#fb7185;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{min-height:100%;background:#0b1224}
+body{margin:0;min-height:100vh;color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:linear-gradient(160deg,#0b1224 0%,#142a5c 55%,#1f4fa8 100%);background-attachment:fixed}
+.w{max-width:520px;margin:0 auto;padding:18px 16px 32px}
+.logo{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.logo i{width:44px;height:44px;border-radius:12px;background:var(--g);color:#0b1224;font:700 24px system-ui;display:grid;place-items:center;font-style:normal}
+.logo b{font-size:20px;display:block}.logo span{font-size:12px;color:var(--mu)}
+.box{background:rgba(10,16,36,.55);border:1px solid rgba(140,170,255,.25);border-radius:22px;padding:20px 16px}
+.eyebrow{color:var(--g);font-size:12px;font-weight:700;letter-spacing:.14em;text-align:center}
+h1{font-size:30px;line-height:1.15;text-align:center;margin:10px 0 12px}
+.lead{color:var(--mu);text-align:center;font-size:14px;margin:0 0 18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.stats div{background:rgba(255,255,255,.06);border:1px solid rgba(140,170,255,.2);border-radius:12px;padding:10px 4px;text-align:center}
+.stats b{display:block;color:var(--g);font-size:20px}.stats small{font-size:12px;color:var(--mu)}
+h2{font-size:16px;margin:0 0 10px}
+button{font:inherit;color:inherit;cursor:pointer}
+.ders{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:rgba(40,70,140,.45);border:1px solid rgba(140,170,255,.3);border-radius:16px;padding:14px;margin-bottom:10px}
+.ders em{font-style:normal;font-size:24px;width:42px;height:42px;display:grid;place-items:center;background:rgba(255,255,255,.1);border-radius:10px}
+.ders span{flex:1}.ders b{display:block;font-size:15px}.ders small{color:var(--mu)}
+.note{text-align:center;color:var(--mu);font-size:12px;margin-top:14px}
+.top{display:flex;justify-content:space-between;font-size:13px;color:var(--mu);margin-bottom:8px}
+.bar{height:6px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;background:var(--g);transition:width .3s}
+.q{font-size:18px;font-weight:600;margin-bottom:14px}
+.opt{display:block;width:100%;text-align:left;padding:13px;margin-bottom:8px;background:rgba(40,70,140,.45);border:1.5px solid rgba(140,170,255,.3);border-radius:12px;font-size:15px}
+.opt.ok{border-color:var(--ok);background:rgba(74,222,128,.2)}
+.opt.no{border-color:var(--no);background:rgba(251,113,133,.2)}
+.exp{margin-top:10px;padding:12px;border-radius:12px;background:rgba(255,255,255,.08);font-size:14px}
+.main{display:block;width:100%;padding:14px;margin-top:12px;border:0;border-radius:12px;background:var(--g);color:#0b1224;font-weight:700;font-size:16px}
+.ghost{background:transparent;color:var(--tx);border:1.5px solid rgba(140,170,255,.4)}
+.big{font-size:52px;font-weight:800;text-align:center;color:var(--g);margin:10px 0}
+.c{text-align:center}
+#hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.h{position:absolute;bottom:-40px;color:#ff8fab;opacity:.35;animation:up linear infinite}
+@keyframes up{to{transform:translateY(-115vh) rotate(25deg)}}
+@media (prefers-reduced-motion:reduce){.h{animation:none;bottom:auto}}
+.w{position:relative;z-index:1}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<div class="w">
+<div class="logo"><i>S</i><div><b>Soru Bankası</b><span>Soru çöz, pekiştir</span></div></div>
+<div class="box" id="app"></div>
+</div>
+<script>
+const D=[
+{ad:"Hukukun Temel Kavramları",ic:"⚖️",q:[
+["Hukuk kurallarını diğer toplumsal kurallardan ayıran temel özellik nedir?",["Devlet gücüyle desteklenen yaptırımı olması","Sadece ahlaka dayanması","Gönüllü uyulması","Yalnızca dinî olması"],0,"Hukuk kurallarının uygulanması devlet zoruyla sağlanır."],
+["Hangisi yazılı hukuk kaynağıdır?",["Kanun","Örf ve âdet","Gelenek","Ahlak"],0,"Kanun yazılı kaynaktır; örf ve âdet yazılı değildir."],
+["Kişilik ne zaman başlar?",["Çocuğun sağ ve tam doğumuyla","Anne karnında 3. ayda","18 yaşında","Nüfusa kayıtla"],0,"Medeni Kanuna göre kişilik tam ve sağ doğumla başlar."],
+["Türk hukukunda ergin olma yaşı kaçtır?",["18","15","21","16"],0,"18 yaşını dolduran kişi ergin olur."],
+["Fiil ehliyetinin şartlarından biri hangisidir?",["Ayırt etme gücüne sahip olmak","Zengin olmak","Evli olmak","Meslek sahibi olmak"],0,"Ergin, ayırt etme gücüne sahip ve kısıtlı olmayan kişi tam fiil ehliyetlidir."],
+["Hangisi tüzel kişiye örnektir?",["Dernek","Bir kişi","Bir bebek","Bir çiftçi"],0,"Dernek, vakıf ve şirketler tüzel kişidir."],
+["Hukuk kurallarının genel ve soyut olması ne demektir?",["Belirli kişiye değil, herkese ve benzer olaylara uygulanır","Sadece bir kişi için geçerlidir","Yazılı olmaz","Geçmişe yöneliktir"],0,"Genellik ve soyutluk, kuralın herkese ve benzer olaylara uygulanabilmesidir."],
+["Hangisi kamu hukuku dalıdır?",["Anayasa hukuku","Borçlar hukuku","Eşya hukuku","Aile hukuku"],0,"Anayasa hukuku kamu hukukunun dalıdır."],
+["Hangisi özel hukuk dalıdır?",["Borçlar hukuku","Ceza hukuku","Anayasa hukuku","Vergi hukuku"],0,"Borçlar hukuku özel hukuka girer."],
+["Hak ehliyeti nedir?",["Hak sahibi olabilme ve borç altına girebilme yeteneği","Dava açma yaşı","Evlenme izni","Oy kullanma"],0,"Her insan hak ehliyetine sahiptir."],
+["Bir kanunun yürürlüğe girmesi için genellikle ne gerekir?",["Resmî Gazete'de yayımlanması","Sadece TBMM'de okunması","Gazetede haber olması","Belediyeye bildirilmesi"],0,"Kanunlar Resmî Gazete'de yayımlanarak yürürlüğe girer."],
+["Mülkiyet hakkı hangi hak türüne girer?",["Ayni hak","Kişilik hakkı","Aile hakkı","Siyasi hak"],0,"Mülkiyet, eşya üzerinde doğrudan hâkimiyet sağlayan ayni haktır."]]},
+{ad:"İngilizce 1",ic:"🔤",q:[
+["I ___ a student.",["am","is","are","be"],0,"I ile am kullanılır."],
+["She ___ from Turkey.",["is","am","are","do"],0,"She ile is kullanılır."],
+["They ___ my friends.",["are","is","am","be"],0,"They ile are kullanılır."],
+["'Child' sözcüğünün çoğulu hangisidir?",["children","childs","childes","childrens"],0,"Child → children (düzensiz çoğul)."],
+["He ___ football every Sunday.",["plays","play","playing","to play"],0,"Present Simple'da he/she/it fiile -s alır."],
+["___ you like coffee?",["Do","Does","Is","Are"],0,"you ile soru: Do you ...?"],
+["'Big' sözcüğünün zıt anlamlısı hangisidir?",["small","tall","old","fast"],0,"big ↔ small."],
+["Hangisi doğrudur?",["an apple","a apple","an book","a egg"],0,"Sesli harfle başlayan sözcüklerde an kullanılır."],
+["'What time is it?' sorusuna uygun cevap hangisidir?",["It's ten o'clock.","I'm fine.","Yes, I do.","It's a book."],0,"Saat sorusuna saat bilgisiyle cevap verilir."],
+["This is ___ book. (ben)",["my","me","I","mine"],0,"Sahiplik sıfatı: my."],
+["There ___ two books on the table.",["are","is","am","be"],0,"Çoğul isimle there are kullanılır."],
+["'Thank you.' sözüne uygun cevap hangisidir?",["You're welcome.","Good night.","See you.","Excuse me."],0,"Teşekküre 'You're welcome' denir."]]},
+{ad:"İktisada Giriş",ic:"📈",q:[
+["Kıtlık sorunu neden ortaya çıkar?",["Kaynaklar sınırlı, ihtiyaçlar sınırsız olduğu için","Kaynaklar sonsuz olduğu için","Para basıldığı için","Ürün fazla olduğu için"],0,"İktisadın temel sorunu sınırlı kaynak–sınırsız ihtiyaçtır."],
+["Fırsat maliyeti nedir?",["Seçim yapınca vazgeçilen en iyi alternatifin değeri","Ürünün üretim maliyeti","Vergi tutarı","Faiz oranı"],0,"Fırsat maliyeti, vazgeçilen en iyi seçeneğin değeridir."],
+["Talep kanununa göre fiyat artarsa, diğer şeyler sabitken talep miktarı ne olur?",["Azalır","Artar","Değişmez","Sıfır olur"],0,"Fiyat ile talep miktarı ters yönlüdür."],
+["Arz kanununa göre fiyat artarsa arz miktarı ne olur?",["Artar","Azalır","Değişmez","Önce azalır"],0,"Fiyat ile arz miktarı aynı yönlüdür."],
+["Denge fiyatı nerede oluşur?",["Arz ve talebin kesiştiği noktada","Devletin belirlediği yerde","Talebin sıfır olduğu yerde","Arzın sıfır olduğu yerde"],0,"Arz eğrisi ile talep eğrisi denge noktasında kesişir."],
+["Mikroiktisat neyi inceler?",["Tüketici ve firma gibi bireysel birimleri","Ülke ekonomisinin tamamını","Sadece dış ticareti","Sadece parayı"],0,"Mikroiktisat bireysel karar birimleriyle ilgilenir."],
+["Makroiktisat hangi konuyla ilgilenir?",["Enflasyon, işsizlik ve büyüme","Tek bir firmanın kârı","Bir ailenin bütçesi","Bir ürünün fiyatı"],0,"Makroiktisat ekonominin bütününü inceler."],
+["Enflasyon nedir?",["Genel fiyat düzeyinin sürekli artması","Fiyatların düşmesi","İşsizliğin artması","Üretimin artması"],0,"Enflasyon, genel fiyat düzeyindeki sürekli artıştır."],
+["Gelir arttıkça talebi artan mallara ne denir?",["Normal mal","Düşük mal","Serbest mal","Kamusal mal"],0,"Normal mallarda gelir ile talep aynı yönlüdür."],
+["Çayın fiyatı artarsa, ikame mal olan kahvenin talebi ne olur?",["Artar","Azalır","Değişmez","Sıfır olur"],0,"İkame malın fiyatı artınca diğer malın talebi artar."],
+["Hangisi üretim faktörlerinden biridir?",["Emek","Enflasyon","Vergi","Faiz oranı"],0,"Üretim faktörleri: emek, sermaye, doğal kaynaklar, girişimci."],
+["GSYH nedir?",["Bir ülkede belirli dönemde üretilen nihai mal ve hizmetlerin toplam değeri","Devlet bütçesi","Toplam vergi geliri","Toplam ihracat"],0,"GSYH üretimin parasal toplamıdır."]]},
+{ad:"Genel İşletme",ic:"🏢",q:[
+["İşletme nedir?",["Mal veya hizmet üreterek ekonomik amaç güden kuruluş","Sadece devlet dairesi","Sadece banka","Sadece dernek"],0,"İşletme, mal/hizmet üretip sunan ekonomik birimdir."],
+["Yönetim fonksiyonları hangi sırayla verilmiştir?",["Planlama, örgütleme, yürütme, denetim","Denetim, planlama, satış, üretim","Üretim, satış, muhasebe, denetim","Örgütleme, kâr, zarar, satış"],0,"Klasik yönetim fonksiyonları bunlardır."],
+["Planlamanın amacı nedir?",["Hedeflere ulaşmak için yapılacakları önceden belirlemek","Personeli işten çıkarmak","Ürünü satmak","Defter tutmak"],0,"Planlama, geleceğe yönelik hazırlıktır."],
+["Denetim fonksiyonu ne yapar?",["Gerçekleşenleri plan ve hedeflerle karşılaştırır","Hedef belirler","Personel alır","Ürün tasarlar"],0,"Denetimde sapmalar tespit edilip düzeltilir."],
+["Şahıs işletmesinin özelliği hangisidir?",["Tek kişiye aittir","Hissedarları vardır","Borsada işlem görür","Kamu kuruluşudur"],0,"Şahıs işletmesi tek kişiye aittir."],
+["Anonim şirketin sermayesi nasıl bölünmüştür?",["Paylara (hisselere)","Aylara","Odalara","Ürünlere"],0,"Anonim şirketin sermayesi paylara bölünmüştür."],
+["Pazarlama karması (4P) hangisini içerir?",["Ürün, fiyat, dağıtım, tanıtım","Üretim, kâr, vergi, borç","Personel, plan, para, proje","Pazar, para, ürün, vergi"],0,"4P: Product, Price, Place, Promotion."],
+["SWOT analizinde S harfi neyi ifade eder?",["Güçlü yönler","Zayıf yönler","Fırsatlar","Tehditler"],0,"S = Strengths (güçlü yönler)."],
+["Bilimsel yönetimin öncüsü kimdir?",["Frederick Taylor","Adam Smith","Max Weber","Henry Ford"],0,"Taylor bilimsel yönetim yaklaşımının öncüsüdür."],
+["İnsan kaynakları yönetimi neyle ilgilenir?",["Personelin seçimi, eğitimi ve değerlendirilmesiyle","Sadece ürün satışıyla","Sadece muhasebeyle","Sadece vergiyle"],0,"İK, çalışanların yönetimini kapsar."],
+["Örgütleme fonksiyonu neyi kapsar?",["Görev, yetki ve sorumlulukların dağıtımını","Sadece satışı","Sadece denetimi","Sadece fiyatı"],0,"Örgütleme, iş bölümü ve yetki-sorumluluk düzenidir."],
+["İşletmelerin temel amaçlarından biri hangisidir?",["Kâr elde etmek","Zarar etmek","Vergi vermemek","Faaliyeti durdurmak"],0,"Özel işletmelerin temel amacı kârdır."]]},
+{ad:"Genel Muhasebe",ic:"🧾",q:[
+["Muhasebe denkliği hangisidir?",["Varlıklar = Kaynaklar (Borçlar + Özkaynaklar)","Gelir = Gider","Alacak = Vergi","Kasa = Banka"],0,"Varlıklar, borç ve özkaynaklarla finanse edilir."],
+["Çift taraflı kayıt ilkesi ne der?",["Her işlemde borç toplamı alacak toplamına eşittir","Her işlem tek hesaba yazılır","Alacaklar yazılmaz","Sadece kasa yazılır"],0,"Her kayıtta borç = alacak olmalıdır."],
+["Kasa hesabı hangi gruba girer?",["Dönen varlıklar","Kısa vadeli borçlar","Özkaynaklar","Gelirler"],0,"Kasa (100), dönen varlıktır."],
+["Bilanço neyi gösterir?",["Belirli bir tarihte varlık ve kaynakları","Dönem kârını","Sadece satışları","Sadece giderleri"],0,"Bilanço, bir tarihteki finansal durumu gösterir."],
+["Gelir tablosu neyi gösterir?",["Dönem faaliyet sonucunu (kâr/zarar)","Varlıkları","Borçları","Stokları"],0,"Gelir tablosu dönem kâr veya zararını gösterir."],
+["Varlık hesabı artınca hesap hangi tarafa yazılır?",["Borç","Alacak","Yevmiye","Mizan"],0,"Varlık hesapları borçla artar, alacakla azalır."],
+["Borç (kaynak) hesabı artınca hangi tarafa yazılır?",["Alacak","Borç","Her ikisine","Hiçbirine"],0,"Kaynak hesapları alacakla artar."],
+["Tek düzen hesap planında 100 kodu hangi hesaptır?",["Kasa","Alıcılar","Satıcılar","Banka"],0,"100 Kasa, 102 Bankalar'dır."],
+["Tek düzen hesap planında 120 kodu hangi hesaptır?",["Alıcılar","Satıcılar","Kasa","Sermaye"],0,"120 Alıcılar (müşteri alacakları)."],
+["Tek düzen hesap planında 320 kodu hangi hesaptır?",["Satıcılar","Alıcılar","Kasa","Banka"],0,"320 Satıcılar (ticari borçlar)."],
+["Yevmiye defteri neyi gösterir?",["İşlemlerin tarih sırasıyla kaydını","Sadece stokları","Sadece vergiyi","Sadece personeli"],0,"Yevmiye defterine işlemler tarih sırasıyla yazılır."],
+["Büyük defter (defteri kebir) neyi içerir?",["Hesapların kayıtlarının toplandığı defteri","Sadece sipariş listesini","Sadece fatura numarasını","Çalışan listesini"],0,"Yevmiyedeki kayıtlar hesaplara büyük defterde aktarılır."]]},
+{ad:"Temel Bilgi Teknolojileri",ic:"🖥️",q:[
+["Bilgisayarda komutları işleyen ana birim hangisidir?",["İşlemci (CPU)","RAM","Güç kaynağı","Klavye"],0,"CPU komutları çalıştırır."],
+["1 Byte kaç bittir?",["8","4","16","1024"],0,"1 Byte = 8 bit."],
+["1 KB kaç Byte'tır?",["1024","1000","8","512"],0,"1 KB = 1024 Byte."],
+["RAM için hangisi doğrudur?",["Geçici (uçucu) bellektir","Kalıcı depolar","Sadece okunur","Ağ cihazıdır"],0,"Elektrik kesilince RAM içeriği silinir."],
+["Hangisi bir giriş birimidir?",["Klavye","Yazıcı","Monitör","Hoparlör"],0,"Klavye veri girişi yapar."],
+["Hangisi bir işletim sistemidir?",["Windows","Excel","Chrome","Word"],0,"Windows bir işletim sistemidir."],
+["Hangisi bir web tarayıcısıdır?",["Chrome","Linux","Excel","Photoshop"],0,"Chrome bir web tarayıcısıdır."],
+["Hangisi bir kelime işlemci programıdır?",["Word","Excel","Paint","Chrome"],0,"Word, kelime işlemci programıdır."],
+["IP adresi nedir?",["Ağdaki cihazı tanımlayan adres","Bir virüs adı","Bir işlemci modeli","Bir dosya türü"],0,"IP adresi cihazı ağda tanımlar."],
+["Bilgisayarı zararlı yazılımlardan korumak için ne kullanılır?",["Antivirüs","Yazıcı","Hoparlör","Tarayıcı"],0,"Antivirüs zararlı yazılımları tespit eder."],
+["Oltalama (phishing) saldırısı nedir?",["Sahte site ya da mesajla bilgi çalmaya çalışmak","Donanım arızası","Dosya sıkıştırma","Ekran yenileme"],0,"Phishing kullanıcıyı kandırarak bilgi çalar."],
+["Bulut bilişim nedir?",["Hizmet ve verilerin internet üzerinden uzak sunucularda sunulması","Sadece yerel disk kullanımı","Bir virüs türü","Bir yazıcı çeşidi"],0,"Bulut bilişimde kaynaklara internet üzerinden erişilir."]]}
+];
+const esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const X=[[
+["Ceza hukukunun temel ilkesi hangisidir?",["Kanunsuz suç ve ceza olmaz","Her davranış suçtur","Ceza geçmişe yürür","Cezada keyfîlik esastır"],0,"Suçta ve cezada kanunilik ilkesi geçerlidir."],
+["Hukuk normları hiyerarşisinin en üstünde hangisi yer alır?",["Anayasa","Yönetmelik","Genelge","Tüzük"],0,"Anayasa en üst hukuk normudur."],
+["Hukuki işlem nedir?",["Hukuki sonuç doğurmaya yönelik irade beyanı","Doğa olayı","Yargıç kararı","Vergi tutarı"],0,"Hukuki işlem, hukuki sonuç doğurmayı amaçlayan irade beyanıdır."],
+["Dürüstlük kuralı (iyi niyet) neyi ifade eder?",["Haklar kullanılırken ve borçlar yerine getirilirken dürüst davranmayı","Sadece ticarette geçerli olmayı","Sadece devlet için geçerli olmayı","Dürüstlüğün gerekmemesini"],0,"Medeni Kanun herkesin dürüstlük kurallarına uymasını ister."],
+["Gerçek kişi kimdir?",["İnsan","Şirket","Dernek","Vakıf"],0,"Gerçek kişiler insanlardır."],
+["Zamanaşımına uğramış bir alacak için hangisi doğrudur?",["Dava yoluyla istenemez","Hiç ödenemez","Hemen siliner","Faizi artar"],0,"Zamanaşımına uğrayan alacak dava yoluyla istenemez."],
+["Kanunun geriye yürümemesi ne demektir?",["Yürürlük tarihinden sonraki olaylara uygulanması","Eski olaylara uygulanması","Hiç uygulanmaması","Sadece yargıçlara uygulanması"],0,"Kanunlar kural olarak ileriye yönelik uygulanır."],
+["Yargı yetkisi Türk milleti adına kimler tarafından kullanılır?",["Bağımsız mahkemeler","Bakanlar","Belediyeler","Valiler"],0,"Yargı yetkisi bağımsız mahkemelerce kullanılır."]
+],[
+["'box' sözcüğünün çoğulu hangisidir?",["boxes","boxs","boxies","boxen"],0,"-x ile biten sözcüklere -es eklenir."],
+["I ___ breakfast at 8.",["have","has","am","is"],0,"I ile have kullanılır."],
+["'Günaydın' ifadesinin İngilizcesi hangisidir?",["Good morning","Good night","Good evening","Goodbye"],0,"Good morning = Günaydın."],
+["My brother's wife is my ___.",["sister-in-law","mother","aunt","cousin"],0,"Erkek kardeşin eşi: sister-in-law (yenge)."],
+["She ___ TV now.",["is watching","watches","watch","are watching"],0,"Şu anda olan eylemde Present Continuous kullanılır."],
+["Where ___ you live?",["do","does","is","are"],0,"you ile soru: Where do you live?"],
+["'How are you?' sorusuna uygun cevap hangisidir?",["I'm fine, thanks.","It's red.","Yes, I am.","At six."],0,"Hal hatır sorusuna 'I'm fine, thanks' denir."],
+["Is he a doctor? – No, he ___.",["isn't","don't","aren't","doesn't"],0,"is sorusuna 'No, he isn't' cevabı verilir."]
+],[
+["Bir malın fiyatı dışında talebi etkileyen faktör hangisidir?",["Gelir","Üretim teknolojisi","Hammadde fiyatı","Çalışan sayısı"],0,"Gelir, zevk ve ikame fiyatları talebi etkiler."],
+["Talebin fiyat esnekliği neyi ölçer?",["Fiyat değişince talep miktarının ne kadar değiştiğini","Gelir artışını","Vergiyi","Faizi"],0,"Esneklik, duyarlılığı ölçer."],
+["Hangisi tamamlayıcı mal çiftidir?",["Araba ve benzin","Çay ve kahve","Elma ve armut","Ekmek ve simit"],0,"Birlikte tüketilen mallar tamamlayıcıdır."],
+["Tam rekabet piyasasının özelliği hangisidir?",["Çok sayıda alıcı ve satıcı","Tek satıcı","Tek alıcı","İki firma"],0,"Tam rekabette alıcı ve satıcılar fiyatı etkileyemez."],
+["Tekel piyasasında kaç satıcı vardır?",["Bir","İki","Çok sayıda","Hiç"],0,"Tekelde tek satıcı vardır."],
+["İşsizlik nedir?",["Çalışmak isteyip iş bulamama durumu","Çalışmak istememek","Emekli olmak","Öğrenci olmak"],0,"İşsiz, çalışmak isteyip iş bulamayan kişidir."],
+["Hangisi paranın fonksiyonlarından biridir?",["Değişim aracı olması","Üretim faktörü olması","Vergi olması","Enflasyon olması"],0,"Para değişim aracı, hesap birimi ve değer saklama aracıdır."],
+["Para politikasını genellikle hangi kurum yürütür?",["Merkez bankası","Belediye","Ticaret odası","Dernek"],0,"Para politikası merkez bankasının görevidir."]
+],[
+["Kollektif şirkette ortakların sorumluluğu nasıldır?",["Şirket borçlarından sınırsız sorumludur","Hiç sorumlu değildir","Sadece sermayesiyle sınırlıdır","Sadece vergiyle sınırlıdır"],0,"Kollektif şirkette ortaklar sınırsız ve müteselsil sorumludur."],
+["Misyon neyi ifade eder?",["İşletmenin varoluş amacını","Gelecekte ulaşmak istediği durumu","Borç miktarını","Çalışan sayısını"],0,"Misyon, işletmenin neden var olduğudur."],
+["Vizyon neyi ifade eder?",["İşletmenin ulaşmak istediği gelecek durumunu","Geçmiş kârını","Personel listesini","Vergi tutarını"],0,"Vizyon, gelecekteki hedef durumdur."],
+["Maliyet nedir?",["Üretim için katlanılan fedakârlıkların parasal ifadesi","Satış geliri","Kâr","Vergi iadesi"],0,"Maliyet, üretim için yapılan harcamaların toplamıdır."],
+["Finansman fonksiyonu neyle ilgilenir?",["İşletmenin ihtiyaç duyduğu fonları sağlamakla","Reklam yapmakla","Personel seçmekle","Ürün tasarlamakla"],0,"Finansman, fon sağlama ve kullanma işidir."],
+["Pazar bölümlendirme nedir?",["Pazarı benzer özellikli gruplara ayırmak","Pazarı kapatmak","Ürünü ucuzlatmak","Personeli azaltmak"],0,"Pazar, benzer ihtiyaçlı müşteri gruplarına bölünür."],
+["Kooperatif hangi amaçla kurulur?",["Ortakların ortak ihtiyaçlarını karşılamak","Sadece kâr dağıtmak","Devlet gelirini artırmak","Borsada işlem yapmak"],0,"Kooperatif, ortaklarının ekonomik ihtiyaçlarını karşılar."],
+["Liderlik nedir?",["Bireyleri ortak amaç için etkileyip yönlendirmek","Sadece emir vermek","Sadece denetlemek","Sadece plan yapmak"],0,"Liderlik, insanları ortak hedefe yöneltme sürecidir."]
+],[
+["Tek düzen hesap planında 102 kodu hangi hesaptır?",["Bankalar","Kasa","Alıcılar","Satıcılar"],0,"102 Bankalar hesabıdır."],
+["600 Yurtiçi Satışlar hesabı hangi türdendir?",["Gelir hesabı","Varlık hesabı","Borç hesabı","Özkaynak hesabı"],0,"600 gelir hesabıdır."],
+["153 Ticari Mallar hesabı neyi gösterir?",["Satılmak üzere alınan malları (stok)","Bankadaki parayı","Müşteri alacağını","Sermayeyi"],0,"153, ticari mal stoğudur."],
+["Mizan nedir?",["Hesap bakiyelerinin borç-alacak eşitliğini kontrol eden tablo","Fatura türü","Vergi beyannamesi","Satış sözleşmesi"],0,"Mizan, kayıtların doğruluğunu denetlemeye yarar."],
+["Fatura neyi gösterir?",["Satılan mal veya hizmete ait bilgileri","Sadece kasa mevcudunu","Bankadaki parayı","Personel maaşını"],0,"Fatura satış belgesidir."],
+["Amortisman nedir?",["Duran varlığın zamanla değer kaybının gider yazılması","Satış geliri","Kâr payı","Banka faizi"],0,"Amortisman, duran varlıkların yıpranmasının giderleştirilmesidir."],
+["500 Sermaye hesabı hangi gruptadır?",["Özkaynaklar","Dönen varlıklar","Kısa vadeli borçlar","Gelirler"],0,"500 Sermaye, özkaynak hesabıdır."],
+["Mal peşin satıldığında hangi hesap borçlanır?",["Kasa","Satıcılar","Sermaye","Banka kredisi"],0,"Para girişi olduğu için Kasa borçlanır."]
+],[
+["1 MB kaç KB'tır?",["1024","1000","8","512"],0,"1 MB = 1024 KB."],
+["Hangisi bir çıkış birimidir?",["Yazıcı","Klavye","Fare","Mikrofon"],0,"Yazıcı çıktı verir."],
+["Dosya uzantısı .xlsx hangi programa aittir?",["Excel","Word","PowerPoint","Paint"],0,".xlsx Excel dosyasıdır."],
+["Ctrl + C kısayolu ne yapar?",["Kopyalar","Yapıştırır","Keser","Siler"],0,"Ctrl+C kopyalama kısayoludur."],
+["Ctrl + V kısayolu ne yapar?",["Yapıştırır","Kopyalar","Geri alır","Kaydeder"],0,"Ctrl+V yapıştırma kısayoludur."],
+["Hangisi güçlü bir paroladır?",["Büyük-küçük harf, rakam ve sembol içeren","123456","Adın aynısı","Doğum tarihi"],0,"Karma ve uzun parolalar daha güvenlidir."],
+["Donanım nedir?",["Bilgisayarın fiziksel parçaları","Bilgisayar programları","İnternet bağlantısı","Dosya uzantısı"],0,"Donanım, dokunulabilen fiziksel parçalardır."],
+["Hangisi kalıcı depolama birimidir?",["SSD","RAM","Önbellek","Kayıtçı"],0,"SSD, veriyi kalıcı olarak saklar."]
+]];
+X.forEach((e,i)=>D[i].q.push(...e));
+const A=document.getElementById('app');let S={};
+const sh=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+function home(){const t=D.reduce((s,d)=>s+d.q.length,0);
+let h=`<div class="eyebrow">VİZE HAZIRLIK UYGULAMASI</div><h1>Bilgini test et.<br>Vizeye hazır ol.</h1><p class="lead">Dersini seç, soruları çöz, doğru ve yanlışlarını gör. İstediğin zaman tekrar deneyebilirsin.</p><div class="stats"><div><b>${D.length}</b><small>Ders</small></div><div><b>${t}</b><small>Soru</small></div><div><b>Ücretsiz</b><small>Kullanım</small></div></div><h2>Dersini seç</h2>`;
+D.forEach((d,i)=>h+=`<button class="ders" onclick="start(${i})"><em>${d.ic}</em><span><b>${d.ad}</b><small>${d.q.length} soru</small></span>›</button>`);
+h+='<div class="note">Cevap verdikten sonra doğru yanıtı ve açıklamasını görebilirsin.</div>';A.innerHTML=h}
+function start(i){const q=sh(D[i].q).map(c=>{const o=c[1].map((t,k)=>[t,k===c[2]]);const m=sh(o);return[c[0],m.map(x=>x[0]),m.findIndex(x=>x[1]),c[3]]});S={i,q,n:0,p:0,a:false};show()}
+function show(){const{q,n}=S;if(n>=q.length)return end();const c=q[n];
+let h=`<div class="top"><span>${D[S.i].ad}</span><span>${n+1}/${q.length}</span></div><div class="bar"><i style="width:${n/q.length*100}%"></i></div><div class="q">${esc(c[0])}</div>`;
+c[1].forEach((o,k)=>h+=`<button class="opt" id="o${k}" onclick="pick(${k})">${'ABCD'[k]}) ${esc(o)}</button>`);
+h+='<div id="ex"></div><button class="main ghost" onclick="home()">Derslere dön</button>';A.innerHTML=h}
+function pick(k){if(S.a)return;S.a=true;const c=S.q[S.n];if(k===c[2])S.p++;
+document.getElementById('o'+c[2]).classList.add('ok');if(k!==c[2])document.getElementById('o'+k).classList.add('no');
+document.getElementById('ex').innerHTML=`<div class="exp">${k===c[2]?'✅ Doğru!':'❌ Yanlış.'} ${esc(c[3])}</div><button class="main" onclick="next()">${S.n+1>=S.q.length?'Sonucu gör':'Sonraki soru'}</button>`}
+function next(){S.n++;S.a=false;show()}
+function end(){const t=S.q.length;A.innerHTML=`<div class="c"><div>Sonuç</div><div class="big">${S.p}/${t}</div><div>${S.p===t?'Harika! 🎉':S.p>=t/2?'İyi gidiyorsun 👍':'Tekrar çözmeye devam 💪'}</div></div><button class="main" onclick="start(${S.i})">Tekrar çöz</button><button class="main ghost" onclick="home()">Derslere dön</button>`}
+const H=document.getElementById('hearts');
+const N=Math.min(90,Math.max(30,Math.round(innerWidth*innerHeight/22000)));
+for(let i=0;i<N;i++){const e=document.createElement('span');e.className='h';e.textContent='\u2665';
+e.style.left=Math.random()*100+'%';e.style.fontSize=(10+Math.random()*14)+'px';
+e.style.animationDuration=(14+Math.random()*16)+'s';e.style.animationDelay=(-Math.random()*30)+'s';
+if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)e.style.top=Math.random()*100+'%';
+H.appendChild(e)}
+home();
+</script>
+</body>
+</html>
